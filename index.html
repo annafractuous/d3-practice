@@ -9,6 +9,17 @@
 <body>
     <div class="container">
         <h2>D3 Practice</h2>
+        <svg height="400" width="600" style="background:#fff">
+            <rect x="200" y="100" width="150" height="150" style="fill:#ABDEF7" />
+            <circle cx="200" cy="300" r="75" style="fill:#FA6BD7" />
+            <g id="triangle">
+                <polyline points="20 20, 235 235, 50 35" style="fill: #F36A4D" />
+            </g>
+            <text x="350" y="370" font-family="Georgia" font-size="32" fill="#A67GBE">
+                SVG Graphics
+            </text>
+            <use xlink:href="#triangle" x="200" y="20" />
+        </svg>
         <section id="chart">
         </section>
     </div>

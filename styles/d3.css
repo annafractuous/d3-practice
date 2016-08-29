@@ -4,7 +4,8 @@
 }
 
 .item {
-  padding-left: 30px;
+  padding: 5px 30px;
+  margin-top: 10px
 }
 
 .bigger {
