@@ -30,10 +30,6 @@ body {
   color: #475B62;
 }
 
-strong {
-  font-weight: 600;
-}
-
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Roboto Slab', "Helvetica Neue", Helvetica, sans-serif;
   font-weight: 700;
@@ -44,6 +40,10 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
   margin-bottom: .5em;
+}
+
+strong {
+  font-weight: 600;
 }
 
 .container {
