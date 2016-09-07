@@ -30,13 +30,21 @@ var chart = d3.select('#chart').append('svg')
             return colors(i);
         })
         .attr('width', xScale.bandwidth)
-        .attr('height', function(d) { return yScale(d); })
         .attr('x', function(d, i) {
             return xScale(i);
         })
-        .attr('y', function(d) {
-            return height - yScale(d);
-        });
+        .attr('height', 0)
+        .attr('y', height)
+        .transition().duration(700)
+            .attr('height', function(d) {
+                return yScale(d);
+            })
+            .attr('y', function(d) {
+                return height - yScale(d);
+            })
+            .delay(function(d, i) {
+                return i * 10;
+            })
 
 chart
   .on('mouseover', function(d) {
