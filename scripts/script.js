@@ -68,4 +68,7 @@ chart.on('mouseover', function(d) {
     d3.select(this)
       .style('opacity', 1)
       .style('stroke', 'none');
+
+    tooltip.transition()
+      .style('opacity', 0);
   });
