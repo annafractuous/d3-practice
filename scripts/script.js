@@ -22,6 +22,10 @@ var height = 400,
     width = 600,
     barOffset = 5;
 
+var colors = d3.scaleLinear()
+    .domain([0, d3.max(barData)])
+    .range(['red', 'green'])
+
 var yScale = d3.scaleLinear()
     .domain([0, d3.max(barData)])
     .range([0, height - 20]);
@@ -37,7 +41,7 @@ d3.select('#chart').append('svg')
     .style('background', 'lightblue')
     .selectAll('rect').data(barData)
     .enter().append('rect')
-        .style('fill', '#C61C6F')
+        .style('fill', colors)
         .attr('width', xScale.bandwidth)
         .attr('height', function(d) { return yScale(d); })
         .attr('x', function(d, i) {
