@@ -1,30 +1,16 @@
-var writers = [
-    { name: 'Virginia Woolf',
-      booksCount: 20,
-      color : '#BD3613' },
-    { name: 'Toni Morrison',
-      booksCount: 23,
-      color : '#A57706' },
-    { name: 'Maya Angelou',
-      booksCount: 7,
-      color : '#595AB7' },
-    { name: 'Zora Neale Hurston',
-      booksCount: 26,
-      color : '#2176C7' },
-    { name: 'Annie Dillard',
-      booksCount: 13,
-      color : '#259286' }
-]
-
-var barData = [13,29,98,63,77];
+var barData = [];
+for (var i = 0; i < 100; i++) {
+  barData.push(Math.random() * 10);
+}
 
 var height = 400,
-    width = 600,
-    barOffset = 5;
+    width = 600;
 
 var colors = d3.scaleLinear()
-    .domain([0, d3.max(barData)])
-    .range(['red', 'green'])
+    .domain([0, barData.length*.33, barData.length*.66, barData.length])
+    .range(['red', 'purple', 'blue', 'orange'])
+
+var currentColor;
 
 var yScale = d3.scaleLinear()
     .domain([0, d3.max(barData)])
@@ -33,15 +19,16 @@ var yScale = d3.scaleLinear()
 var xScale = d3.scaleBand()
     .domain(d3.range(0, barData.length))
     .rangeRound([0, width])
-    .padding(0.05)
+    .paddingInner(0.05)
 
-d3.select('#chart').append('svg')
+var chart = d3.select('#chart').append('svg')
     .attr('width', width)
     .attr('height', height)
-    .style('background', 'lightblue')
     .selectAll('rect').data(barData)
     .enter().append('rect')
-        .style('fill', colors)
+        .style('fill', function(d, i) {
+            return colors(i);
+        })
         .attr('width', xScale.bandwidth)
         .attr('height', function(d) { return yScale(d); })
         .attr('x', function(d, i) {
@@ -50,3 +37,18 @@ d3.select('#chart').append('svg')
         .attr('y', function(d) {
             return height - yScale(d);
         });
+
+chart
+  .on('mouseover', function(d) {
+    currentColor = this.style.fill;
+    d3.select(this)
+      .style('opacity', .5)
+      .style('fill', 'lightblue')
+      .style('stroke', 'darkblue');
+  })
+  .on('mouseout', function(d) {
+    d3.select(this)
+      .style('opacity', 1)
+      .style('fill', currentColor)
+      .style('stroke', 'none');
+  });
